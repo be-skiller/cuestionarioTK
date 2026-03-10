@@ -109,6 +109,52 @@
             padding-left: 20px;
         }
 
+        .disclaimer-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .disclaimer-box h4 {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #aaa;
+            margin-bottom: 12px;
+        }
+
+        .disclaimer-box ul {
+            list-style: none;
+            margin-bottom: 14px;
+        }
+
+        .disclaimer-box li {
+            font-size: 13px;
+            color: #888;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .disclaimer-box li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #555;
+        }
+
+        .disclaimer-accept {
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+
         .btn-primary {
             background: linear-gradient(135deg, #FF8C42 0%, #FF6B1A 100%);
             color: white;
@@ -482,6 +528,16 @@
                 </ul>
             </div>
             
+            <div class="disclaimer-box">
+                <h4>Antes de comenzar</h4>
+                <ul>
+                    <li>Esta herramienta es de uso exclusivamente formativo.</li>
+                    <li>No se recogen ni almacenan datos personales.</li>
+                    <li>Los resultados son orientativos y no constituyen una evaluación profesional.</li>
+                </ul>
+                <p class="disclaimer-accept">Al pulsar "Comenzar" aceptas estas condiciones.</p>
+            </div>
+
             <button class="btn-primary" onclick="startQuiz()">Comenzar Cuestionario</button>
         </div>
     </div>
@@ -600,9 +656,9 @@
             [0,0,0,0,1], [0,1,0,0,0], [0,0,0,0,1], [0,0,0,0,1], [0,0,0,1,0],
             [1,0,0,0,0], [0,0,1,0,0], [0,1,0,0,0], [1,0,0,0,0], [0,0,1,0,0],
             [0,0,0,0,1], [0,0,1,0,0], [1,0,0,0,0], [1,0,0,0,0], [0,0,0,1,0],
-            [1,0,0,0,0], [0,0,0,1,0], [0,0,1,0,0], [0,0,0,1,0], [0,0,1,0,0],
-            [0,1,0,0,0], [1,0,0,0,0], [0,0,0,1,0], [0,0,1,0,0], [0,0,0,0,1],
-            [0,1,0,0,0], [0,0,0,0,1], [0,1,0,0,0], [0,0,0,1,0], [0,1,0,0,0]
+            [1,0,0,0,0], [0,0,0,1,0], [0,0,1,0,0], [0,0,0,1,0], [1,0,0,0,0],
+            [0,1,0,0,0], [1,0,0,0,0], [0,0,0,1,0], [1,0,0,0,0], [0,0,0,0,1],
+            [0,1,0,0,0], [0,0,0,0,1], [0,1,0,0,0], [0,1,0,0,0], [0,1,0,0,0]
         ];
 
         const styles = {
