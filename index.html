@@ -460,6 +460,95 @@
             margin-top: 40px;
         }
 
+        /* Modal de idioma */
+        .lang-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .lang-modal-overlay.hidden {
+            display: none;
+        }
+
+        .lang-modal {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+            border: 2px solid #FF6B1A;
+            border-radius: 20px;
+            padding: 50px 40px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(255, 107, 26, 0.35);
+        }
+
+        .lang-modal .logo {
+            margin-bottom: 24px;
+        }
+
+        .lang-modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .lang-modal-subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 36px;
+            letter-spacing: 0.03em;
+        }
+
+        .lang-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn-lang {
+            flex: 1;
+            max-width: 180px;
+            background: rgba(255, 107, 26, 0.08);
+            border: 1.5px solid rgba(255, 107, 26, 0.35);
+            border-radius: 14px;
+            padding: 22px 16px;
+            cursor: pointer;
+            transition: all 0.25s;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-lang:hover {
+            background: rgba(255, 107, 26, 0.18);
+            border-color: #FF6B1A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(255, 107, 26, 0.3);
+        }
+
+        .btn-lang .lang-flag {
+            font-size: 36px;
+            line-height: 1;
+        }
+
+        .btn-lang .lang-name {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .btn-lang .lang-native {
+            font-size: 12px;
+            color: #888;
+        }
+
         @media (max-width: 768px) {
             .welcome-card {
                 padding: 30px 16px;
@@ -529,6 +618,30 @@
     </style>
 </head>
 <body>
+    <!-- Modal de selección de idioma -->
+    <div id="langModal" class="lang-modal-overlay">
+        <div class="lang-modal">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <div class="logo-text">Be-Skiller</div>
+            </div>
+            <p class="lang-modal-title">Selecciona tu idioma</p>
+            <p class="lang-modal-subtitle">Select your language</p>
+            <div class="lang-buttons">
+                <button class="btn-lang" onclick="selectLanguage('es')">
+                    <span class="lang-flag">🇪🇸</span>
+                    <span class="lang-name">Español</span>
+                    <span class="lang-native">Spanish</span>
+                </button>
+                <button class="btn-lang" onclick="selectLanguage('en')">
+                    <span class="lang-flag">🇬🇧</span>
+                    <span class="lang-name">English</span>
+                    <span class="lang-native">Inglés</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Pantalla de bienvenida -->
     <div id="welcomeScreen" class="screen active welcome-screen">
         <div class="welcome-card">
@@ -536,30 +649,30 @@
                 <div class="logo-icon"></div>
                 <div class="logo-text">Be-Skiller</div>
             </div>
-            <h1>Cuestionario de Resolución de Conflictos</h1>
-            <p class="subtitle">Descubre tu estilo predominante respondiendo a 30 preguntas sobre cómo manejas situaciones de conflicto.</p>
-            
+            <h1 id="welcomeTitle">Cuestionario de Resolución de Conflictos</h1>
+            <p class="subtitle" id="welcomeSubtitle">Descubre tu estilo predominante respondiendo a 30 preguntas sobre cómo manejas situaciones de conflicto.</p>
+
             <div class="info-box">
-                <h3>¿Cómo funciona?</h3>
-                <ul>
+                <h3 id="howTitle">¿Cómo funciona?</h3>
+                <ul id="howList">
                     <li>• Lee cada par de afirmaciones</li>
                     <li>• Elige la opción que mejor te describa</li>
                     <li>• Puedes navegar entre preguntas libremente</li>
                     <li>• Al final conocerás tu perfil de resolución de conflictos</li>
                 </ul>
             </div>
-            
+
             <div class="disclaimer-box">
-                <h4>Antes de comenzar</h4>
-                <ul>
+                <h4 id="disclaimerTitle">Antes de comenzar</h4>
+                <ul id="disclaimerList">
                     <li><span class="disc-icon">✦</span> Esta herramienta es de uso exclusivamente formativo.</li>
                     <li><span class="disc-icon">✦</span> No se recogen ni almacenan datos personales.</li>
                     <li><span class="disc-icon">✦</span> Los resultados son orientativos y no constituyen una evaluación profesional.</li>
                 </ul>
-                <p class="disclaimer-accept">Al pulsar "Comenzar" aceptas estas condiciones.</p>
+                <p class="disclaimer-accept" id="disclaimerAccept">Al pulsar "Comenzar" aceptas estas condiciones.</p>
             </div>
 
-            <button class="btn-primary" onclick="startQuiz()">Comenzar Cuestionario</button>
+            <button class="btn-primary" id="startBtn" onclick="startQuiz()">Comenzar Cuestionario</button>
         </div>
     </div>
 
@@ -572,15 +685,15 @@
             </div>
 
             <div class="progress-info">
-                <span>Pregunta <span id="currentNum">1</span> de 30</span>
-                <span>Respondidas: <span id="answeredCount">0</span>/30</span>
+                <span id="currentNum">Pregunta 1 de 30</span>
+                <span id="answeredCount">Respondidas: 0/30</span>
             </div>
             <div class="progress-bar">
                 <div id="progressFill" class="progress-fill" style="width: 3.33%"></div>
             </div>
 
             <div class="question-card">
-                <h2 class="question-title">Elige la opción que mejor te describa:</h2>
+                <h2 class="question-title" id="questionPrompt">Elige la opción que mejor te describa:</h2>
                 <div id="optionsContainer"></div>
             </div>
 
@@ -597,7 +710,7 @@
             </div>
 
             <div class="quick-nav">
-                <div class="quick-nav-title">Navegación rápida:</div>
+                <div class="quick-nav-title" id="quickNavTitle">Navegación rápida:</div>
                 <div class="quick-nav-grid" id="quickNavGrid"></div>
             </div>
         </div>
@@ -612,16 +725,16 @@
                         <div class="logo-icon"></div>
                         <div class="logo-text">Be-Skiller</div>
                     </div>
-                    <h1>Resultados del Cuestionario</h1>
-                    <p class="subtitle">Tu perfil de resolución de conflictos</p>
+                    <h1 id="resultsTitle">Resultados del Cuestionario</h1>
+                    <p class="subtitle" id="resultsSubtitle">Tu perfil de resolución de conflictos</p>
                 </div>
 
-                <h2 class="top-styles-title">Tus Estilos Predominantes</h2>
+                <h2 class="top-styles-title" id="topStylesTitle">Tus Estilos Predominantes</h2>
                 <div class="top-styles-grid" id="topStylesGrid"></div>
                 </div>
 
                 <div class="restart-container">
-                    <button class="btn-primary" onclick="restart()">
+                    <button class="btn-primary" id="restartBtn" onclick="restart()">
                         🔄 Realizar Nuevo Cuestionario
                     </button>
                 </div>
@@ -630,7 +743,65 @@
     </div>
 
     <script>
-        const questions = [
+        // ── Idioma activo ──────────────────────────────────────────────
+        let currentLang = 'es';
+
+        // ── Traducciones de la UI ──────────────────────────────────────
+        const ui = {
+            es: {
+                pageTitle: 'Cuestionario de Resolución de Conflictos - Be-Skiller',
+                welcomeTitle: 'Cuestionario de Resolución de Conflictos',
+                welcomeSubtitle: 'Descubre tu estilo predominante respondiendo a 30 preguntas sobre cómo manejas situaciones de conflicto.',
+                howTitle: '¿Cómo funciona?',
+                howItems: ['Lee cada par de afirmaciones', 'Elige la opción que mejor te describa', 'Puedes navegar entre preguntas libremente', 'Al final conocerás tu perfil de resolución de conflictos'],
+                disclaimerTitle: 'Antes de comenzar',
+                disclaimerItems: ['Esta herramienta es de uso exclusivamente formativo.', 'No se recogen ni almacenan datos personales.', 'Los resultados son orientativos y no constituyen una evaluación profesional.'],
+                disclaimerAccept: 'Al pulsar "Comenzar" aceptas estas condiciones.',
+                startBtn: 'Comenzar Cuestionario',
+                questionOf: (n) => `Pregunta ${n} de 30`,
+                answered: (n) => `Respondidas: ${n}/30`,
+                questionPrompt: 'Elige la opción que mejor te describa:',
+                prevBtn: '← Anterior',
+                nextBtn: 'Siguiente →',
+                finishBtn: 'Ver Resultados',
+                quickNavTitle: 'Navegación rápida:',
+                resultsTitle: 'Resultados del Cuestionario',
+                resultsSubtitle: 'Tu perfil de resolución de conflictos',
+                topStylesTitle: 'Tus Estilos Predominantes',
+                primaryStyle: 'Estilo principal',
+                secondaryStyle: 'Estilo secundario',
+                restartBtn: '🔄 Realizar Nuevo Cuestionario',
+                alertIncomplete: 'Por favor, responde todas las preguntas antes de ver los resultados.',
+            },
+            en: {
+                pageTitle: 'Conflict Resolution Styles Questionnaire - Be-Skiller',
+                welcomeTitle: 'Conflict Resolution Styles Questionnaire',
+                welcomeSubtitle: 'Discover your predominant style by answering 30 questions about how you handle conflict situations.',
+                howTitle: 'How does it work?',
+                howItems: ['Read each pair of statements', 'Choose the option that best describes you', 'You can navigate between questions freely', 'At the end you will know your conflict resolution profile'],
+                disclaimerTitle: 'Before you begin',
+                disclaimerItems: ['This tool is for training purposes only.', 'No personal data is collected or stored.', 'Results are indicative and do not constitute a professional assessment.'],
+                disclaimerAccept: 'By clicking "Start" you accept these conditions.',
+                startBtn: 'Start Questionnaire',
+                questionOf: (n) => `Question ${n} of 30`,
+                answered: (n) => `Answered: ${n}/30`,
+                questionPrompt: 'Choose the option that best describes you:',
+                prevBtn: '← Previous',
+                nextBtn: 'Next →',
+                finishBtn: 'See Results',
+                quickNavTitle: 'Quick navigation:',
+                resultsTitle: 'Questionnaire Results',
+                resultsSubtitle: 'Your conflict resolution profile',
+                topStylesTitle: 'Your Predominant Styles',
+                primaryStyle: 'Primary style',
+                secondaryStyle: 'Secondary style',
+                restartBtn: '🔄 Take Questionnaire Again',
+                alertIncomplete: 'Please answer all questions before viewing the results.',
+            }
+        };
+
+        // ── Preguntas ──────────────────────────────────────────────────
+        const questionsES = [
             { a: "Hay ocasiones en que dejo a otro la responsabilidad de resolver un problema.", b: "Antes de negociar las cosas con las que estamos en desacuerdo, trato de subrayar aquello en lo que coincidimos." },
             { a: "Trato de encontrar una solución de compromiso.", b: "Trato de discutir todos y cada uno de los asuntos que nos preocupan a cada una de las partes." },
             { a: "Generalmente me muestro firme en conseguir mis metas.", b: "Intento suavizar los sentimientos del otro y preservar la relación." },
@@ -663,7 +834,40 @@
             { a: "Trato de no herir los sentimientos del otro.", b: "Siempre afronto el problema junto con la otra parte, para que podamos trabajar sobre él." }
         ];
 
-        // Matriz de puntuación: [E1, E2, E3, E4, E5]
+        const questionsEN = [
+            { a: "Sometimes I leave it to others to solve a problem.", b: "Before negotiating points of disagreement, I try to emphasize what we agree on." },
+            { a: "I try to find a compromise solution.", b: "I try to discuss each and every concern of both parties." },
+            { a: "I usually stand firm on achieving my goals.", b: "I try to soften the other person's feelings and preserve the relationship." },
+            { a: "I try to find a compromise solution.", b: "Sometimes I sacrifice my own wishes for those of the other person." },
+            { a: "I insistently seek the other person's help in reaching a solution.", b: "I try to do what is necessary to avoid tensions." },
+            { a: "I try not to create unpleasant situations for myself.", b: "I try to win my position." },
+            { a: "I try to postpone the issue until I have had time to reflect on it.", b: "I give up on some points in exchange for others." },
+            { a: "I usually stand firm in achieving my goals.", b: "I try to present all the interests at stake and all possible solutions from the beginning." },
+            { a: "I feel that it is not always worth worrying about differences.", b: "I make some efforts to pursue my path." },
+            { a: "I am firm in achieving my goals.", b: "I try to find a compromise solution." },
+            { a: "I try to present all interests at stake and all possible solutions from the beginning.", b: "I try to soften the other person's feelings and preserve our relationship." },
+            { a: "Sometimes I avoid taking positions that may create controversy.", b: "I allow the other person to obtain some of their positions if they allow me some of mine." },
+            { a: "I propose an intermediate solution.", b: "I push for my ideas to be implemented." },
+            { a: "I share my ideas with the other person and ask for theirs.", b: "I try to show the logic and benefits of my position." },
+            { a: "I try to soften the other person's feelings and preserve our relationship.", b: "I do what is necessary to avoid tensions." },
+            { a: "I try not to hurt others' feelings.", b: "I try to convince the other person of the advantages of my position." },
+            { a: "I usually stand firm in achieving my goals.", b: "I do what I can to avoid unnecessary tensions." },
+            { a: "If it makes the other person happy, I may let them maintain their point of view.", b: "I allow the other person to obtain some of their ideas if they give me some of mine." },
+            { a: "I try to present all interests and possible solutions from the start.", b: "I try to postpone the issue until I have had time to reflect on it." },
+            { a: "I try to discuss our differences first.", b: "I push for my ideas to be implemented." },
+            { a: "In negotiations, I try to be considerate of the other person's wishes.", b: "I always lean toward directly discussing the problem." },
+            { a: "I try to find a solution between mine and the other person's.", b: "I defend my ideas." },
+            { a: "I often care about satisfying both parties' wishes.", b: "Sometimes I leave it to others to solve the problem." },
+            { a: "If the other person's position seems important to them, I try to align with their ideas.", b: "I push for my ideas to be implemented." },
+            { a: "I try to show the logic and benefits of my position.", b: "In negotiations, I try to be considerate of the other person's ideas." },
+            { a: "I propose an intermediate solution.", b: "I am almost always interested in satisfying the wishes of both parties." },
+            { a: "Sometimes I avoid taking positions that could create controversy.", b: "If it makes the other person happy, I may let them maintain their point of view." },
+            { a: "I usually stand firm in achieving my goals.", b: "I usually seek the other person's help to find a solution." },
+            { a: "I propose an intermediate solution.", b: "I believe it is always worth worrying about the differences." },
+            { a: "I try not to hurt the other person's feelings.", b: "I always face the problem together with the other person so we can work on it." }
+        ];
+
+        // ── Matriz de puntuación (igual para ambos idiomas) ────────────
         const scoreMatrixA = [
             [0,0,0,1,0], [0,0,1,0,0], [1,0,0,0,0], [0,0,1,0,0], [0,1,0,0,0],
             [0,0,0,1,0], [0,0,0,1,0], [1,0,0,0,0], [0,0,0,1,0], [1,0,0,0,0],
@@ -682,16 +886,71 @@
             [0,1,0,0,0], [0,0,0,0,1], [0,1,0,0,0], [0,1,0,0,0], [0,1,0,0,0]
         ];
 
-        const styles = {
-            e1: { name: 'Competición', color: '#FF8C42', desc: 'Tiendes a priorizar tus intereses e imponer tu postura. Quieres Ganar.', textColor: '#fff' },
-            e2: { name: 'Asociación', color: '#FFB380', desc: 'Buscas soluciones beneficiosas para ambos. Win-Win.', textColor: '#1a1a1a' },
-            e3: { name: 'Compromiso', color: '#FF6B1A', desc: 'Buscas un punto medio. Equilibrio entre buscar la mejor solución sin una gran inversión.', textColor: '#fff' },
-            e4: { name: 'Evitación', color: '#D6D6D6', desc: 'Tiendes a evitar el conflicto.', textColor: '#1a1a1a' },
-            e5: { name: 'Acomodación', color: '#FFDBBB', desc: 'Priorizas el interés del otro respecto al tuyo. Cedes por una armonía colectiva.', textColor: '#1a1a1a' }
+        // ── Estilos con traducciones ───────────────────────────────────
+        const stylesData = {
+            e1: {
+                es: { name: 'Competición', desc: 'Tiendes a priorizar tus intereses e imponer tu postura. Quieres Ganar.' },
+                en: { name: 'Competition', desc: 'You tend to prioritize your interests and impose your position. You want to Win.' },
+                color: '#FF8C42', textColor: '#fff'
+            },
+            e2: {
+                es: { name: 'Asociación', desc: 'Buscas soluciones beneficiosas para ambos. Win-Win.' },
+                en: { name: 'Association', desc: 'You seek mutually beneficial solutions. Win-Win.' },
+                color: '#FFB380', textColor: '#1a1a1a'
+            },
+            e3: {
+                es: { name: 'Compromiso', desc: 'Buscas un punto medio. Equilibrio entre buscar la mejor solución sin una gran inversión.' },
+                en: { name: 'Commitment', desc: 'You seek a middle ground. Balance between finding the best solution without a large investment.' },
+                color: '#FF6B1A', textColor: '#fff'
+            },
+            e4: {
+                es: { name: 'Evitación', desc: 'Tiendes a evitar el conflicto.' },
+                en: { name: 'Avoidance', desc: 'You tend to avoid conflict.' },
+                color: '#D6D6D6', textColor: '#1a1a1a'
+            },
+            e5: {
+                es: { name: 'Acomodación', desc: 'Priorizas el interés del otro respecto al tuyo. Cedes por una armonía colectiva.' },
+                en: { name: 'Accommodation', desc: 'You prioritize the other person\'s interest over yours. You yield for collective harmony.' },
+                color: '#FFDBBB', textColor: '#1a1a1a'
+            }
         };
 
         let currentQuestion = 0;
         let answers = {};
+
+        // ── Selección de idioma ────────────────────────────────────────
+        function selectLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('langModal').classList.add('hidden');
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const t = ui[currentLang];
+            document.title = t.pageTitle;
+            document.getElementById('welcomeTitle').textContent = t.welcomeTitle;
+            document.getElementById('welcomeSubtitle').textContent = t.welcomeSubtitle;
+            document.getElementById('howTitle').textContent = t.howTitle;
+            const howList = document.getElementById('howList');
+            howList.innerHTML = t.howItems.map(item => `<li>• ${item}</li>`).join('');
+            document.getElementById('disclaimerTitle').textContent = t.disclaimerTitle;
+            const discList = document.getElementById('disclaimerList');
+            discList.innerHTML = t.disclaimerItems.map(item => `<li><span class="disc-icon">✦</span> ${item}</li>`).join('');
+            document.getElementById('disclaimerAccept').textContent = t.disclaimerAccept;
+            document.getElementById('startBtn').textContent = t.startBtn;
+            document.getElementById('quickNavTitle').textContent = t.quickNavTitle;
+            document.getElementById('resultsTitle').textContent = t.resultsTitle;
+            document.getElementById('resultsSubtitle').textContent = t.resultsSubtitle;
+            document.getElementById('topStylesTitle').textContent = t.topStylesTitle;
+            document.getElementById('restartBtn').textContent = t.restartBtn;
+            document.getElementById('prevBtn').textContent = t.prevBtn;
+            document.getElementById('nextBtn').textContent = t.nextBtn;
+            document.getElementById('finishBtn').textContent = t.finishBtn;
+        }
+
+        function getQuestions() {
+            return currentLang === 'en' ? questionsEN : questionsES;
+        }
 
         function startQuiz() {
             document.getElementById('welcomeScreen').classList.remove('active');
@@ -702,9 +961,10 @@
         }
 
         function renderQuestion() {
-            const q = questions[currentQuestion];
+            const q = getQuestions()[currentQuestion];
+            const t = ui[currentLang];
             const container = document.getElementById('optionsContainer');
-            
+
             container.innerHTML = `
                 <div class="option ${answers[currentQuestion] === 'A' ? 'selected' : ''}" onclick="selectAnswer('A')">
                     <div class="option-letter">A</div>
@@ -716,8 +976,9 @@
                 </div>
             `;
 
-            document.getElementById('currentNum').textContent = currentQuestion + 1;
-            document.getElementById('answeredCount').textContent = Object.keys(answers).length;
+            document.getElementById('questionPrompt').textContent = t.questionPrompt;
+            document.getElementById('currentNum').textContent = t.questionOf(currentQuestion + 1);
+            document.getElementById('answeredCount').textContent = t.answered(Object.keys(answers).length);
             document.getElementById('progressFill').style.width = ((currentQuestion + 1) / 30 * 100) + '%';
 
             document.getElementById('prevBtn').disabled = currentQuestion === 0;
@@ -766,43 +1027,31 @@
         function renderQuickNav() {
             const grid = document.getElementById('quickNavGrid');
             grid.innerHTML = '';
-            
             for (let i = 0; i < 30; i++) {
                 const btn = document.createElement('button');
                 btn.className = 'quick-nav-btn';
                 btn.textContent = i + 1;
-                btn.onclick = () => {
-                    goToQuestion(i);
-                };
-                
-                if (i === currentQuestion) {
-                    btn.classList.add('current');
-                } else if (answers[i]) {
-                    btn.classList.add('answered');
-                }
-                
+                btn.onclick = () => goToQuestion(i);
+                if (i === currentQuestion) btn.classList.add('current');
+                else if (answers[i]) btn.classList.add('answered');
                 grid.appendChild(btn);
             }
         }
 
         function calculateResults() {
             const scores = [0, 0, 0, 0, 0];
-            
             for (let i = 0; i < 30; i++) {
                 const answer = answers[i];
                 const matrix = answer === 'A' ? scoreMatrixA : scoreMatrixB;
-                
-                for (let j = 0; j < 5; j++) {
-                    scores[j] += matrix[i][j];
-                }
+                for (let j = 0; j < 5; j++) scores[j] += matrix[i][j];
             }
-            
             return scores;
         }
 
         function showResults() {
+            const t = ui[currentLang];
             if (Object.keys(answers).length !== 30) {
-                alert('Por favor, responde todas las preguntas antes de ver los resultados.');
+                alert(t.alertIncomplete);
                 return;
             }
 
@@ -813,23 +1062,23 @@
             const scores = calculateResults();
             const total = scores.reduce((a, b) => a + b, 0);
             const percentages = scores.map(s => ((s / total) * 100).toFixed(1));
-
-            const sorted = scores.map((score, index) => ({ score, index }))
-                .sort((a, b) => b.score - a.score);
+            const sorted = scores.map((score, index) => ({ score, index })).sort((a, b) => b.score - a.score);
 
             const topStylesGrid = document.getElementById('topStylesGrid');
             topStylesGrid.innerHTML = sorted.slice(0, 2).map((item, idx) => {
                 const styleKey = `e${item.index + 1}`;
-                const style = styles[styleKey];
+                const s = stylesData[styleKey];
+                const langData = s[currentLang];
+                const rankLabel = idx === 0 ? t.primaryStyle : t.secondaryStyle;
                 return `
-                    <div class="top-style-card" style="background-color: ${style.color}; border-color: ${idx === 0 ? '#FF6B1A' : '#FFB380'}; color: ${style.textColor};">
-                        <div class="top-style-rank">${idx === 0 ? 'Estilo principal' : 'Estilo secundario'}</div>
-                        <div class="top-style-name">${style.name}</div>
+                    <div class="top-style-card" style="background-color: ${s.color}; border-color: ${idx === 0 ? '#FF6B1A' : '#FFB380'}; color: ${s.textColor};">
+                        <div class="top-style-rank">${rankLabel}</div>
+                        <div class="top-style-name">${langData.name}</div>
                         <div class="top-style-score-block">
                             <div class="top-style-score">${item.score}</div>
                             <div class="top-style-percent">${percentages[item.index]}%</div>
                         </div>
-                        <div class="top-style-desc">${style.desc}</div>
+                        <div class="top-style-desc">${langData.desc}</div>
                     </div>
                 `;
             }).join('');
@@ -839,8 +1088,7 @@
             currentQuestion = 0;
             answers = {};
             document.getElementById('resultsScreen').classList.remove('active');
-            document.getElementById('welcomeScreen').classList.add('active');
-            document.getElementById('welcomeScreen').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('langModal').classList.remove('hidden');
         }
     </script>
 </body>
