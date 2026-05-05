@@ -57,20 +57,22 @@
             margin-bottom: 30px;
         }
 
-        .logo-icon {
-            width: 60px;
+        .logo-img {
             height: 60px;
-            background: linear-gradient(135deg, #FF8C42 0%, #FF6B1A 100%);
-            border-radius: 10px;
+            width: auto;
         }
 
-        .logo-text {
-            font-size: 48px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #FF8C42 0%, #FF6B1A 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .kilmann-note {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .kilmann-note strong {
+            color: #FF8C42;
+            font-style: normal;
         }
 
         h1 {
@@ -558,8 +560,8 @@
                 font-size: 24px;
             }
 
-            .logo-text {
-                font-size: 32px;
+            .logo-img {
+                height: 36px;
             }
 
             .subtitle {
@@ -615,6 +617,58 @@
                 font-size: 22px;
             }
         }
+
+        /* ---------- Matriz ---------- */
+        .matrix-section { margin-top: 40px; }
+        .matrix-eyebrow { display: inline-block; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #FF6B1A; background: rgba(255,107,26,0.1); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,107,26,0.3); margin-bottom: 16px; }
+        .matrix-title { font-size: clamp(20px,3vw,28px); font-weight: 700; color: #fff; margin: 0 0 8px; letter-spacing: -0.5px; }
+        .matrix-subtitle { color: #ccc; font-size: 15px; margin: 0 0 28px; }
+        .matrix-wrapper { position: relative; width: 100%; aspect-ratio: 1/0.78; background: #1a1a1a; border: 1px solid rgba(255,107,26,0.25); border-radius: 24px; box-shadow: 0 0 40px rgba(255,107,26,0.3); padding: 80px 40px 80px 130px; }
+        .matrix-grid { position: relative; width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 14px; }
+        .matrix-cell { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px; border-radius: 20px; background: #333; border: 1px solid rgba(255,107,26,0.4); box-shadow: 0 0 20px rgba(255,107,26,0.12); color: #fff; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+        .matrix-cell:hover { transform: translateY(-2px); border-color: #FF6B1A; box-shadow: 0 8px 28px rgba(255,107,26,0.55); }
+        .matrix-cell .mc-title { font-size: clamp(14px,2vw,20px); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .matrix-cell .mc-code { margin-top: 6px; font-size: 13px; font-weight: 600; letter-spacing: 1px; color: #ccc; background: rgba(255,107,26,0.12); border: 1px solid rgba(255,107,26,0.4); padding: 3px 10px; border-radius: 999px; }
+        .matrix-cell.mc-acomodacion { background: linear-gradient(135deg,#2a1a10 0%,#3a2516 100%); }
+        .matrix-cell.mc-asociacion  { background: linear-gradient(135deg,#1a2a2e 0%,#16363a 100%); }
+        .matrix-cell.mc-evitacion   { background: linear-gradient(135deg,#1f1f1f 0%,#2a2a2a 100%); }
+        .matrix-cell.mc-competicion { background: linear-gradient(135deg,#2a2218 0%,#3a2e1f 100%); }
+        .matrix-compromiso { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg,#FF8C42 0%,#FF6B1A 100%); color: #fff; padding: 16px 28px; border-radius: 20px; text-align: center; z-index: 5; min-width: 170px; box-shadow: 0 0 30px rgba(255,107,26,0.55); border: 1px solid rgba(255,255,255,0.15); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .matrix-compromiso:hover { transform: translate(-50%,calc(-50% - 2px)); box-shadow: 0 8px 40px rgba(255,107,26,0.55); }
+        .matrix-compromiso .mc-title { font-size: clamp(14px,2vw,20px); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .matrix-compromiso .mc-code { display: inline-block; margin-top: 6px; font-size: 12px; font-weight: 700; letter-spacing: 1px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 999px; }
+        .matrix-axis { position: absolute; background: linear-gradient(135deg,#FF8C42 0%,#FF6B1A 100%); border-radius: 4px; }
+        .matrix-axis-y { left: 80px; top: 60px; bottom: 80px; width: 3px; }
+        .matrix-axis-x { left: 80px; bottom: 70px; right: 30px; height: 3px; }
+        .matrix-arrow { position: absolute; width: 0; height: 0; }
+        .matrix-arrow-up { left: 73px; top: 46px; border-left: 9px solid transparent; border-right: 9px solid transparent; border-bottom: 14px solid #FF6B1A; }
+        .matrix-arrow-right { right: 16px; bottom: 64px; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 14px solid #FF6B1A; }
+        .matrix-label { position: absolute; font-weight: 700; color: #FF6B1A; }
+        .matrix-label-tu { left: 56px; top: 22px; font-size: 22px; letter-spacing: 2px; }
+        .matrix-label-yo { right: 18px; bottom: 32px; font-size: 22px; letter-spacing: 2px; }
+        .matrix-label-interes-otro { position: absolute; left: 26px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: center; color: #aaa; font-size: 13px; font-style: italic; white-space: nowrap; letter-spacing: 1px; }
+        .matrix-label-interes-propio { position: absolute; bottom: 32px; left: calc(50% + 40px); transform: translateX(-50%); color: #aaa; font-size: 13px; font-style: italic; white-space: nowrap; letter-spacing: 1px; }
+        .matrix-legend { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .matrix-legend .chip { font-size: 12px; color: #ccc; background: #1a1a1a; border: 1px solid rgba(255,107,26,0.3); padding: 6px 12px; border-radius: 999px; letter-spacing: 0.5px; }
+        .matrix-legend .chip strong { color: #FF6B1A; font-weight: 700; margin-right: 6px; }
+        @media (max-width: 600px) {
+            .matrix-wrapper { aspect-ratio: unset; height: 360px; padding: 56px 12px 56px 72px; border-radius: 16px; }
+            .matrix-grid { gap: 8px; }
+            .matrix-axis-y { left: 48px; top: 40px; bottom: 52px; }
+            .matrix-axis-x { left: 48px; bottom: 44px; right: 12px; }
+            .matrix-arrow-up { left: 41px; top: 26px; border-left-width: 7px; border-right-width: 7px; border-bottom-width: 11px; }
+            .matrix-arrow-right { right: 4px; bottom: 38px; border-top-width: 7px; border-bottom-width: 7px; border-left-width: 11px; }
+            .matrix-label-tu { left: 28px; top: 12px; font-size: 15px; }
+            .matrix-label-yo { right: 6px; bottom: 16px; font-size: 15px; }
+            .matrix-label-interes-otro { left: 8px; font-size: 10px; }
+            .matrix-label-interes-propio { bottom: 16px; font-size: 10px; }
+            .matrix-compromiso { padding: 10px 14px; min-width: 110px; }
+            .matrix-compromiso .mc-title { font-size: 13px; }
+            .matrix-compromiso .mc-code { font-size: 10px; }
+            .matrix-cell { padding: 10px 6px; border-radius: 12px; }
+            .matrix-cell .mc-title { font-size: 12px; letter-spacing: 0; }
+            .matrix-cell .mc-code { font-size: 11px; padding: 2px 8px; }
+        }
     </style>
 </head>
 <body>
@@ -622,8 +676,7 @@
     <div id="langModal" class="lang-modal-overlay">
         <div class="lang-modal">
             <div class="logo">
-                <div class="logo-icon"></div>
-                <div class="logo-text">Be-Skiller</div>
+                <img src="BS LOGO H02 HORIZONTAL GRADIENT Color Dark.png" alt="Be-Skiller" class="logo-img">
             </div>
             <p class="lang-modal-title">Selecciona tu idioma</p>
             <p class="lang-modal-subtitle">Select your language</p>
@@ -646,8 +699,7 @@
     <div id="welcomeScreen" class="screen active welcome-screen">
         <div class="welcome-card">
             <div class="logo">
-                <div class="logo-icon"></div>
-                <div class="logo-text">Be-Skiller</div>
+                <img src="BS LOGO H02 HORIZONTAL GRADIENT Color Dark.png" alt="Be-Skiller" class="logo-img">
             </div>
             <h1 id="welcomeTitle">Cuestionario de Resolución de Conflictos</h1>
             <p class="subtitle" id="welcomeSubtitle">Descubre tu estilo predominante respondiendo a 30 preguntas sobre cómo manejas situaciones de conflicto.</p>
@@ -672,6 +724,8 @@
                 <p class="disclaimer-accept" id="disclaimerAccept">Al pulsar "Comenzar" aceptas estas condiciones.</p>
             </div>
 
+            <p class="kilmann-note" id="kilmannNote">Basado en el modelo de <strong>Thomas Kilmann</strong>, referente mundial en estilos de negociación y gestión de conflictos.</p>
+
             <button class="btn-primary" id="startBtn" onclick="startQuiz()">Comenzar Cuestionario</button>
         </div>
     </div>
@@ -680,8 +734,7 @@
     <div id="quizScreen" class="screen quiz-screen">
         <div class="container">
             <div class="logo-small logo">
-                <div class="logo-icon"></div>
-                <div class="logo-text">Be-Skiller</div>
+                <img src="BS LOGO H02 HORIZONTAL GRADIENT Color Dark.png" alt="Be-Skiller" class="logo-img">
             </div>
 
             <div class="progress-info">
@@ -731,6 +784,39 @@
 
                 <h2 class="top-styles-title" id="topStylesTitle">Tus Estilos Predominantes</h2>
                 <div class="top-styles-grid" id="topStylesGrid"></div>
+                </div>
+
+                <!-- Matriz de estilos -->
+                <div class="matrix-section">
+                    <div style="text-align:center; margin-bottom:24px;">
+                        <span class="matrix-eyebrow">Be-Skiller · Gestión del Conflicto</span>
+                        <h2 class="matrix-title">Matriz de Estilos de Gestión del Conflicto</h2>
+                        <p class="matrix-subtitle">Cinco estilos según el equilibrio entre el interés propio (YO) y el interés del otro (TÚ).</p>
+                    </div>
+                    <div class="matrix-wrapper">
+                        <div class="matrix-axis matrix-axis-y"></div>
+                        <div class="matrix-axis matrix-axis-x"></div>
+                        <div class="matrix-arrow matrix-arrow-up"></div>
+                        <div class="matrix-arrow matrix-arrow-right"></div>
+                        <span class="matrix-label matrix-label-tu">TÚ</span>
+                        <span class="matrix-label matrix-label-yo">YO</span>
+                        <span class="matrix-label-interes-otro">Interés otro</span>
+                        <span class="matrix-label-interes-propio">Interés propio</span>
+                        <div class="matrix-grid">
+                            <div class="matrix-cell mc-acomodacion"><div class="mc-title">Acomodación</div><div class="mc-code">E5</div></div>
+                            <div class="matrix-cell mc-asociacion"><div class="mc-title">Asociación</div><div class="mc-code">E2</div></div>
+                            <div class="matrix-cell mc-evitacion"><div class="mc-title">Evitación</div><div class="mc-code">E4</div></div>
+                            <div class="matrix-cell mc-competicion"><div class="mc-title">Competición</div><div class="mc-code">E1</div></div>
+                            <div class="matrix-compromiso"><div class="mc-title">Compromiso</div><div class="mc-code">E3</div></div>
+                        </div>
+                    </div>
+                    <div class="matrix-legend">
+                        <span class="chip"><strong>E1</strong>Competición</span>
+                        <span class="chip"><strong>E2</strong>Asociación</span>
+                        <span class="chip"><strong>E3</strong>Compromiso</span>
+                        <span class="chip"><strong>E4</strong>Evitación</span>
+                        <span class="chip"><strong>E5</strong>Acomodación</span>
+                    </div>
                 </div>
 
                 <div class="restart-container">
